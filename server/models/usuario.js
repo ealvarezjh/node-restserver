@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+// Plugin para validaciones personalizadas
 const uniqueValidator = require('mongoose-unique-validator');
 
 
@@ -44,7 +46,7 @@ let usuarioSchema = new Schema({
     }
 });
 
-
+// Método para modificar la propiedad -password- de la respuesta 
 usuarioSchema.methods.toJSON = function() {
 
     let user = this;
@@ -54,7 +56,7 @@ usuarioSchema.methods.toJSON = function() {
     return userObject;
 }
 
-
+// Configuración de plugin sobre Schema
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
 
 
