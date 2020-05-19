@@ -15,7 +15,7 @@ app.use(require('./routes/usuario'));
 
 
 // Conexión: MongoDB(localhost)
-mongoose.connect('mongodb://localhost:27017/cafe', {
+mongoose.connect(process.env.URLDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
