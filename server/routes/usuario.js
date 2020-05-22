@@ -1,16 +1,18 @@
 const express = require('express');
+const bcrypt = require('bcrypt'); // Encriptación de contraseña
+const _ = require('underscore'); // Filtrado de propiedades
 
-// Encriptación de contraseña
-const bcrypt = require('bcrypt');
 
-// Filtrado de propiedades
-const _ = require('underscore');
+// Middleware para validar token
+const { validarToken, validarRole } = require('../middlewares/autenticacion');
 
 const Usuario = require('../models/usuario');
+
 const app = express();
 
 
-app.get('/usuario', function(req, res) {
+// Pasamos un middleware personalizado como segundo argumento para validar token
+app.get('/usuario', validarToken, (req, res) => {
 
     // Parámetros opcionales se almacenan en -req.query-
     let desde = Number(req.query.desde) || 0;
@@ -43,7 +45,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [validarToken, validarRole], (req, res) => {
     // Obtenemos cuerpo de la petición - body-parser
     let body = req.body;
 
@@ -76,7 +78,7 @@ app.post('/usuario', function(req, res) {
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [validarToken, validarRole], (req, res) => {
 
     let id = req.params.id;
     // Utilizamos underscore para filtrar propiedades de retorno
@@ -101,7 +103,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [validarToken, validarRole], (req, res) => {
 
     let id = req.params.id;
 

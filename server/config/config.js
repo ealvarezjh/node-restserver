@@ -11,6 +11,19 @@ process.env.PORT = process.env.PORT || 3000
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
+// ===================
+// Caducidad del token
+// ===================
+// 60segundos * 60minutos * 24horas * 30días = 1MES
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+// =====================
+// SEED de autenticación
+// =====================
+
+process.env.SEED = process.env.SEDD || 'seed-de-desarrollo';
+
 
 // ===============
 // Base de datos
@@ -24,7 +37,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 } else {
 
-    urlDB = process.env.MONGO_URL;
+    urlDB = process.env.MONGO_URI;
 }
 
 process.env.URLDB = urlDB;
