@@ -140,4 +140,6 @@ app.delete('/usuario/:id', [validarToken, validarRole], (req, res) => {
 
 
 
+
+
 module.exports = app;

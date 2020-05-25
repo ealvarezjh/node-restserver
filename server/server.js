@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
 
 require('./config/config');
@@ -9,6 +10,10 @@ require('./config/config');
 // Configuración body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+// Publicamos el index.html
+// path.resolve -Necesario para especificar la ruta correctamente
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 // Configuración global de rutas
 app.use(require('./routes/index'));

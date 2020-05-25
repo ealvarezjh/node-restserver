@@ -44,8 +44,6 @@ app.post('/login', (req, res) => {
             usuario: usuarioDB
         }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
-
-
         // Si todo es correcto se genera el token
         res.json({
             ok: true,
