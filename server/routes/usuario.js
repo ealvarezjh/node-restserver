@@ -1,14 +1,16 @@
 const express = require('express');
-const bcrypt = require('bcrypt'); // Encriptación de contraseña
-const _ = require('underscore'); // Filtrado de propiedades
 
+const app = express();
+
+const bcrypt = require('bcrypt'); // Encriptación de contraseña
+
+const _ = require('underscore'); // Filtrado de propiedades
 
 // Middleware para validar token
 const { validarToken, validarRole } = require('../middlewares/autenticacion');
 
 const Usuario = require('../models/usuario');
 
-const app = express();
 
 
 // Pasamos un middleware personalizado como segundo argumento para validar token
@@ -130,12 +132,7 @@ app.delete('/usuario/:id', [validarToken, validarRole], (req, res) => {
             ok: true,
             usuarioBorrado
         });
-
-
     });
-
-
-
 });
 
 
