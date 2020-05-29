@@ -6,7 +6,6 @@ const Producto = require('../models/producto');
 
 const { validarToken } = require('../middlewares/autenticacion');
 
-
 // ============================
 // Obtener productos
 // ============================
